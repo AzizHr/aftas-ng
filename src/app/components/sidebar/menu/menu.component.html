@@ -1,0 +1,5 @@
+<ul class="grid gap-4">
+    <li class="hover:border-l-4 hover:border-green-500 w-full" style="cursor: pointer" *ngFor="let menuItem of menuItems; let i = index">
+      <app-menu-item [link]="routeLinks[i]" [itemIcon]="menuItem.icon" [itemText]="menuItem.text"></app-menu-item>
+    </li>
+  </ul>

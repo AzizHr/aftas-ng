@@ -1,0 +1,40 @@
+<div class="w-full overflow-x-auto p-2">
+    <a routerLink="/competitions/new" style="cursor: pointer;" class="p-2 rounded-sm bg-green-500 text-gray-50 font-semibold flex items-center gap-2 w-fit">
+      <i class="fa-solid fa-plus"></i>
+      <span>New</span>
+    </a>
+    <table class="w-full mt-2">
+      <thead class="text-left border-b border-gray-300">
+        <th class="py-2 pr-3">CODE</th>
+        <th class="py-2 pr-3">DATE</th>
+        <th class="py-2 pr-3">START TIME</th>
+        <th class="py-2 pr-3">END TIME</th>
+        <th class="py-2 pr-3">PARTICIPANTS</th>
+        <th class="py-2 pr-3">LOCATION</th>
+        <th class="py-2 pr-3">AMOUNT</th>
+        <th class="py-2 pr-3">OPERATIONS</th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let competition of competitions" class="border-b border-gray-300">
+          <td class="py-2 text-gray-500">{{ competition.code }}</td>
+          <td class="py-2 text-gray-500">{{ competition.date }}</td>
+          <td class="py-2 text-gray-500">{{ competition.startTime }}</td>
+          <td class="py-2 text-gray-500">{{ competition.endTime }}</td>
+          <td class="py-2 text-gray-500">{{ competition.numberOfParticipants }}</td>
+          <td class="py-2 text-gray-500">{{ competition.location }}</td>
+          <td class="py-2 text-gray-500">{{ competition.amount }}</td>
+          <td class="py-2 text-gray-500 flex gap-4 items-center">
+            <i
+              class="fa-regular fa-pen-to-square text-green-500 bg-green-200 rounded-sm p-2"
+              style="font-size: 20px; cursor: pointer"
+            ></i>
+            <i
+              (click)="confirmDelete(competition.code)"
+              class="fa-regular fa-trash-can text-red-500 bg-red-200 rounded-sm p-2"
+              style="font-size: 20px; cursor: pointer"
+            ></i>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
