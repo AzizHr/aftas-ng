@@ -18,6 +18,7 @@
         <option value="All">All</option>
         <option value="Running">Running</option>
         <option value="Done">Done</option>
+        <option value="Upcoming">Upcoming</option>
       </select>
     </div>
   </div>
@@ -42,19 +43,19 @@
         </a>
         <a href="#!">
           <div
-          *ngIf="isRunning(competition)"
+            *ngIf="isRunning(competition)"
             class="text-xs absolute top-0 right-0 bg-green-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-green-600 transition duration-500 ease-in-out"
           >
             Running
           </div>
           <div
-          *ngIf="isDone(competition)"
+            *ngIf="isDone(competition)"
             class="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out"
           >
             Done
           </div>
           <div
-          *ngIf="notStartedYet(competition)"
+            *ngIf="isUpcoming(competition)"
             class="text-xs absolute top-0 right-0 bg-red-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-red-600 transition duration-500 ease-in-out"
           >
             Upcoming
@@ -68,7 +69,8 @@
           >In {{ competition.location }}</a
         >
         <p class="text-gray-500 text-sm">
-          This competition will start at {{ competition.startTime }} and ends at {{ competition.endTime }}
+          This competition will start at {{ competition.startTime }} and ends at
+          {{ competition.endTime }}
         </p>
       </div>
       <div
@@ -78,40 +80,44 @@
           href="#"
           class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center"
         >
-          <svg
-            height="13px"
-            width="13px"
-            version="1.1"
-            id="Layer_1"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            x="0px"
-            y="0px"
-            viewBox="0 0 512 512"
-            style="enable-background: new 0 0 512 512"
-            xml:space="preserve"
+          <span class="ml-1"
+            ><a
+              [routerLink]="['/competitions/podium', competition.code]"
+              *ngIf="isDone(competition)"
+              class="bg-yellow-500 p-2 rounded-md"
+              style="cursor: pointer"
+            >
+              Podium
+            </a></span
           >
-            <g>
-              <g>
-                <path
-                  d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M277.333,256 c0,11.797-9.536,21.333-21.333,21.333h-85.333c-11.797,0-21.333-9.536-21.333-21.333s9.536-21.333,21.333-21.333h64v-128 c0-11.797,9.536-21.333,21.333-21.333s21.333,9.536,21.333,21.333V256z"
-                ></path>
-              </g>
-            </g>
-          </svg>
-          <span class="ml-1">{{ competition.date }}</span>
         </span>
 
         <span
           href="#"
           class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center"
         >
-        
-        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
-      
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="feather feather-users"
+          >
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+
           <span class="ml-1">{{ competition.numberOfParticipants }}</span>
         </span>
       </div>
     </div>
+    <span *ngIf="competitions.length == 0"> No competitions found! </span>
   </div>
 </div>

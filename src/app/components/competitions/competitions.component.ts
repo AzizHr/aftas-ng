@@ -46,11 +46,27 @@ export class CompetitionsComponent implements OnInit {
   done(): void {
     const currentTime = new Date();
 
-    const upcomingCompetitions = this.competitions.filter((competition) => {
+    const doneCompetitions = this.competitions.filter((competition) => {
       const endDate = new Date(competition.date + ' ' + competition.endTime);
       return endDate < currentTime;
     });
 
+    console.log(doneCompetitions)
+
+    this.competitions = doneCompetitions;
+  }
+
+  upcoming(): void {
+    const currentTime = new Date();
+
+    const upcomingCompetitions = this.competitions.filter((competition) => {
+      const startDate = new Date(
+        competition.date + ' ' + competition.startTime
+      );
+      return startDate > currentTime;
+    });
+
+    console.log(upcomingCompetitions)
     this.competitions = upcomingCompetitions;
   }
 
@@ -68,7 +84,7 @@ export class CompetitionsComponent implements OnInit {
     return endDate < currentTime;
   }
 
-  notStartedYet(competition: CompetitionResponse) {
+  isUpcoming(competition: CompetitionResponse) {
     const currentTime = new Date();
     const startDate = new Date(competition.date + ' ' + competition.startTime);
     return startDate > currentTime;
@@ -84,6 +100,9 @@ export class CompetitionsComponent implements OnInit {
         break;
       case 'Done':
         this.done();
+        break;
+      case 'Upcoming':
+        this.upcoming();
         break;
       default:
         this.all();

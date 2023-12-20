@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, tap } from 'rxjs';
+import { Observable, catchError } from 'rxjs';
 import { Competition } from 'src/app/models/competition/Competition';
 import { CompetitionResponse } from 'src/app/models/competition/CompetitionResponse';
-import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
@@ -38,5 +37,9 @@ export class CompetitionService {
 
   update(competition: Competition): Observable<CompetitionResponse> {
     return this.http.put<CompetitionResponse>(`${this.api}`, competition);
+  }
+
+  podium(competitionCode: any): Observable<any> {
+    return this.http.get<any>(`http://localhost:8080/api/leaderboard/top-three/${competitionCode}`);
   }
 }

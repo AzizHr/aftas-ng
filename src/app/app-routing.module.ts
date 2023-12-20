@@ -18,7 +18,7 @@ const routes: Routes = [
   { path: 'fish', component: FishComponent },
   { path: 'new-member', component: NewMemberComponent },
   { path: 'new-hunting', component: NewHuntingComponent },
-  { path: 'competitions/:code/podium', component: PodiumComponent },
+  { path: 'competitions/podium/:code', component: PodiumComponent },
 ];
 
 @NgModule({
