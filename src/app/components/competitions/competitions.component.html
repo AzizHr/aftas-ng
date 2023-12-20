@@ -1,40 +1,117 @@
 <div class="w-full overflow-x-auto p-2">
-    <a routerLink="/competitions/new" style="cursor: pointer;" class="p-2 rounded-sm bg-green-500 text-gray-50 font-semibold flex items-center gap-2 w-fit">
+  <div class="flex justify-between">
+    <a
+      routerLink="/competitions/new"
+      style="cursor: pointer"
+      class="p-2 rounded-sm bg-green-500 text-gray-50 font-semibold flex items-center gap-2 w-fit"
+    >
       <i class="fa-solid fa-plus"></i>
       <span>New</span>
     </a>
-    <table class="w-full mt-2">
-      <thead class="text-left border-b border-gray-300">
-        <th class="py-2 pr-3">CODE</th>
-        <th class="py-2 pr-3">DATE</th>
-        <th class="py-2 pr-3">START TIME</th>
-        <th class="py-2 pr-3">END TIME</th>
-        <th class="py-2 pr-3">PARTICIPANTS</th>
-        <th class="py-2 pr-3">LOCATION</th>
-        <th class="py-2 pr-3">AMOUNT</th>
-        <th class="py-2 pr-3">OPERATIONS</th>
-      </thead>
-      <tbody>
-        <tr *ngFor="let competition of competitions" class="border-b border-gray-300">
-          <td class="py-2 text-gray-500">{{ competition.code }}</td>
-          <td class="py-2 text-gray-500">{{ competition.date }}</td>
-          <td class="py-2 text-gray-500">{{ competition.startTime }}</td>
-          <td class="py-2 text-gray-500">{{ competition.endTime }}</td>
-          <td class="py-2 text-gray-500">{{ competition.numberOfParticipants }}</td>
-          <td class="py-2 text-gray-500">{{ competition.location }}</td>
-          <td class="py-2 text-gray-500">{{ competition.amount }}</td>
-          <td class="py-2 text-gray-500 flex gap-4 items-center">
-            <i
-              class="fa-regular fa-pen-to-square text-green-500 bg-green-200 rounded-sm p-2"
-              style="font-size: 20px; cursor: pointer"
-            ></i>
-            <i
-              (click)="confirmDelete(competition.code)"
-              class="fa-regular fa-trash-can text-red-500 bg-red-200 rounded-sm p-2"
-              style="font-size: 20px; cursor: pointer"
-            ></i>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+
+    <div class="grid gap-3">
+      <select
+        class="px-2 py-3 rounded-sm border border-gray-500 bg-white"
+        [(ngModel)]="selectedFilter"
+        (ngModelChange)="applyFilter()"
+      >
+        <option value="All">All</option>
+        <option value="Running">Running</option>
+        <option value="Done">Done</option>
+      </select>
+    </div>
   </div>
+
+  <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-4">
+    <!-- CARD 1 -->
+    <div
+      *ngFor="let competition of competitions"
+      class="rounded overflow-hidden shadow-lg flex flex-col"
+    >
+      <a href="#"></a>
+      <div class="relative">
+        <a href="#">
+          <img
+            class="w-full"
+            src="https://www.worldanimalprotection.ca/sites/default/files/styles/600x400/public/media/sebastian-pena-lambarri-YV593oyMKmo-unsplash.jpg?h=efa2ac7b&itok=uKqIptmg"
+            alt="Sunset in the mountains"
+          />
+          <div
+            class="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"
+          ></div>
+        </a>
+        <a href="#!">
+          <div
+          *ngIf="isRunning(competition)"
+            class="text-xs absolute top-0 right-0 bg-green-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-green-600 transition duration-500 ease-in-out"
+          >
+            Running
+          </div>
+          <div
+          *ngIf="isDone(competition)"
+            class="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out"
+          >
+            Done
+          </div>
+          <div
+          *ngIf="notStartedYet(competition)"
+            class="text-xs absolute top-0 right-0 bg-red-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-red-600 transition duration-500 ease-in-out"
+          >
+            Upcoming
+          </div>
+        </a>
+      </div>
+      <div class="px-6 py-4 mb-auto">
+        <a
+          href="#"
+          class="font-medium text-lg inline-block hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2"
+          >In {{ competition.location }}</a
+        >
+        <p class="text-gray-500 text-sm">
+          This competition will start at {{ competition.startTime }} and ends at {{ competition.endTime }}
+        </p>
+      </div>
+      <div
+        class="px-6 py-3 flex flex-row items-center justify-between bg-gray-100"
+      >
+        <span
+          href="#"
+          class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center"
+        >
+          <svg
+            height="13px"
+            width="13px"
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            x="0px"
+            y="0px"
+            viewBox="0 0 512 512"
+            style="enable-background: new 0 0 512 512"
+            xml:space="preserve"
+          >
+            <g>
+              <g>
+                <path
+                  d="M256,0C114.837,0,0,114.837,0,256s114.837,256,256,256s256-114.837,256-256S397.163,0,256,0z M277.333,256 c0,11.797-9.536,21.333-21.333,21.333h-85.333c-11.797,0-21.333-9.536-21.333-21.333s9.536-21.333,21.333-21.333h64v-128 c0-11.797,9.536-21.333,21.333-21.333s21.333,9.536,21.333,21.333V256z"
+                ></path>
+              </g>
+            </g>
+          </svg>
+          <span class="ml-1">{{ competition.date }}</span>
+        </span>
+
+        <span
+          href="#"
+          class="py-1 text-xs font-regular text-gray-900 mr-1 flex flex-row items-center"
+        >
+        
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+      
+          <span class="ml-1">{{ competition.numberOfParticipants }}</span>
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

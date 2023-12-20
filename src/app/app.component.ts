@@ -10,9 +10,5 @@ export class AppComponent {
   title = 'aftas-ng';
 
   constructor(private router: Router) {}
-
-  isDashboardRoute(): boolean {
-    return this.router.url.startsWith('/dashboard');
-  }
   
 }

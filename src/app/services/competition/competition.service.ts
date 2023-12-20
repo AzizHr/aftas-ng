@@ -32,8 +32,8 @@ export class CompetitionService {
     return this.http.delete<string>(`${this.api}/${code}`, { responseType: 'json' })
   }
 
-  findByCode(code: string): Observable<CompetitionResponse> {
-    return this.http.get<CompetitionResponse>(`${this.api}/${code}`);
+  findByCode(code: string): Observable<any> {
+    return this.http.get<any>(`${this.api}/${code}`);
   }
 
   update(competition: Competition): Observable<CompetitionResponse> {

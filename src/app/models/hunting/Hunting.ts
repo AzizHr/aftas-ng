@@ -1,5 +1,5 @@
 export interface Hunting {
-    id: number;
+    id?: number;
     numberOfFish: number;
     competitionCode: string;
     fishName: string;

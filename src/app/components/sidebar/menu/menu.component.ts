@@ -13,9 +13,9 @@ export class MenuComponent {
     new MenuItem('Dashboard', 'fa-solid fa-bars'),
     new MenuItem('Competitions', 'fa-solid fa-motorcycle'),
     new MenuItem('Fish', 'fa-solid fa-fish-fins'),
-    new MenuItem('Huntings', 'fa-solid fa-utensils'),
+    new MenuItem('New Hunting', 'fa-solid fa-utensils'),
     new MenuItem('Members', 'fa-solid fa-users'),
-    new MenuItem('Rankings', 'fa-solid fa-ranking-star'),
+    new MenuItem('New Member', 'fa-solid fa-ranking-star'),
     new MenuItem('Levels', 'fa-solid fa-turn-up'),
   ];
 
@@ -23,9 +23,9 @@ export class MenuComponent {
     '/',
     '/competitions',
     '/fish',
-    '/huntings',
+    '/new-hunting',
     '/members',
-    '/rankings',
+    '/new-member',
     '/levels'
   ];
 

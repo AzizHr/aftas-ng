@@ -1,15 +1,8 @@
-<div *ngIf="isDashboardRoute()" class="flex gap-2">
+<div class="flex gap-2">
   <app-sidebar></app-sidebar>
   <div class="w-[80%]">
     <div class="w-[100%] mt-20">
       <router-outlet></router-outlet>
     </div>
-  </div>
-</div>
-
-<div *ngIf="!isDashboardRoute()">
-  <app-navbar></app-navbar>
-  <div class="w-[100%] mt-20">
-    <router-outlet></router-outlet>
   </div>
 </div>

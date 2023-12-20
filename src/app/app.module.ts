@@ -18,10 +18,10 @@ import { MenuItemComponent } from './components/sidebar/menu/menu-item/menu-item
 import { AddCompetitionComponent } from './components/competitions/add-competition/add-competition.component';
 import { AddHuntingComponent } from './components/huntings/add-hunting/add-hunting.component';
 import { AddRankingComponent } from './components/rankings/add-ranking/add-ranking.component';
-import { HomeComponent } from './components/home/home.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { CompetitionsUserComponent } from './components/competitions-user/competitions-user.component';
-import { CompeteComponent } from './components/competitions-user/compete/compete.component';
+import { PodiumComponent } from './components/podium/podium.component';
+import { NewMemberComponent } from './components/competitions/new-member/new-member.component';
+import { NewHuntingComponent } from './components/competitions/new-hunting/new-hunting.component';
 
 @NgModule({
   declarations: [
@@ -39,10 +39,10 @@ import { CompeteComponent } from './components/competitions-user/compete/compete
     AddCompetitionComponent,
     AddHuntingComponent,
     AddRankingComponent,
-    HomeComponent,
     NavbarComponent,
-    CompetitionsUserComponent,
-    CompeteComponent
+    PodiumComponent,
+    NewMemberComponent,
+    NewHuntingComponent
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

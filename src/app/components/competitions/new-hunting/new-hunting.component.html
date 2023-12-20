@@ -1,0 +1,74 @@
+<form
+  method="post"
+  (ngSubmit)="newHunting()"
+  class="grid gap-10 md:w-[50%] w-[100%] mx-auto rounded-sm shadow-lg p-4"
+>
+  <div class="grid gap-3">
+    <label for="title" class="text-gray-600">Number of fish</label>
+    <input
+      type="number"
+      name="numberOfFish"
+      [(ngModel)]="hunting.numberOfFish"
+      placeholder="Subject title"
+      min="1"
+      class="px-2 py-3 rounded-sm border border-gray-500py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+    />
+  </div>
+  <div class="grid gap-3">
+    <label
+      for="countries"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Select a competition</label
+    >
+    <select
+      [(ngModel)]="hunting.competitionCode"
+      name="competitionCode"
+      id="countries"
+      class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+    >
+      <option
+        *ngFor="let competition of competitions"
+        [value]="competition.code"
+      >
+        {{ competition.location }}
+      </option>
+    </select>
+  </div>
+  <div class="grid gap-3">
+    <label
+      for="countries"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Select a member</label
+    >
+    <select
+      [(ngModel)]="hunting.memberNum"
+      name="memberNum"
+      class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+    >
+      <option selected *ngFor="let member of members" [value]="member.num">
+        {{ member.name }}
+      </option>
+    </select>
+  </div>
+  <div class="grid gap-3">
+    <label
+      for="countries"
+      class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+      >Select a fish</label
+    >
+    <select
+      [(ngModel)]="hunting.fishName"
+      name="fishName"
+      class="py-3 px-4 pe-9 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
+    >
+      <option selected *ngFor="let _fish of fish" [value]="_fish.name">
+        {{ _fish.name }}
+      </option>
+    </select>
+  </div>
+  <button
+    class="rounded-sm bg-cyan-500 p-3 font-semibold justify-self-start text-gray-50"
+  >
+    Submit
+  </button>
+</form>

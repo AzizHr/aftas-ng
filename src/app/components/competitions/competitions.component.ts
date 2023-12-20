@@ -9,6 +9,7 @@ import Swal from 'sweetalert2';
 })
 export class CompetitionsComponent implements OnInit {
   competitions: CompetitionResponse[];
+  selectedFilter: string = 'All';
 
   ngOnInit(): void {
     this.all();
@@ -23,6 +24,71 @@ export class CompetitionsComponent implements OnInit {
       this.competitions = data.competitions;
       console.log(data.competitions);
     });
+  }
+
+  running(): void {
+    const currentTime = new Date();
+
+    const runningCompetitions = this.competitions.filter((competition) => {
+      const startDate = new Date(
+        competition.date + ' ' + competition.startTime
+      );
+      const endDate = new Date(competition.date + ' ' + competition.endTime);
+
+      return startDate <= currentTime && endDate >= currentTime;
+    });
+
+    console.log(runningCompetitions);
+
+    this.competitions = runningCompetitions;
+  }
+
+  done(): void {
+    const currentTime = new Date();
+
+    const upcomingCompetitions = this.competitions.filter((competition) => {
+      const endDate = new Date(competition.date + ' ' + competition.endTime);
+      return endDate < currentTime;
+    });
+
+    this.competitions = upcomingCompetitions;
+  }
+
+  isRunning(competition: CompetitionResponse) {
+    const currentTime = new Date();
+    const startDate = new Date(competition.date + ' ' + competition.startTime);
+    const endDate = new Date(competition.date + ' ' + competition.endTime);
+
+    return startDate <= currentTime && endDate >= currentTime;
+  }
+
+  isDone(competition: CompetitionResponse) {
+    const currentTime = new Date();
+    const endDate = new Date(competition.date + ' ' + competition.endTime);
+    return endDate < currentTime;
+  }
+
+  notStartedYet(competition: CompetitionResponse) {
+    const currentTime = new Date();
+    const startDate = new Date(competition.date + ' ' + competition.startTime);
+    return startDate > currentTime;
+  }
+
+  applyFilter(): void {
+    switch (this.selectedFilter) {
+      case 'All':
+        this.all();
+        break;
+      case 'Running':
+        this.running();
+        break;
+      case 'Done':
+        this.done();
+        break;
+      default:
+        this.all();
+        break;
+    }
   }
 
   confirmDelete(code: string) {
