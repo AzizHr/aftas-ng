@@ -42,7 +42,7 @@ import { NewHuntingComponent } from './components/competitions/new-hunting/new-h
     NavbarComponent,
     PodiumComponent,
     NewMemberComponent,
-    NewHuntingComponent
+    NewHuntingComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

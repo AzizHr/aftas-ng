@@ -8,23 +8,58 @@ import Swal from 'sweetalert2';
   templateUrl: './competitions.component.html',
 })
 export class CompetitionsComponent implements OnInit {
+  isfirstPage() {
+    return this.data.pageable.pageNumber == 0;
+  }
+
+  isLastPage() {
+    return this.data.last;
+  }
+
   competitions: CompetitionResponse[];
+  data: any;
   selectedFilter: string = 'All';
 
+  page: number = 0;
+  items: number = 3;
+  totalPages: number = 0;
+
   ngOnInit(): void {
-    this.all();
+    this.all(0, 3);
+  }
+
+  onPageChange(event: any) {
+    const page = event.page;
+    const pageSize = event.rows;
+    this.all(page, pageSize);
   }
 
   constructor(private competitionService: CompetitionService) {
     this.competitions = [];
   }
 
-  all(): void {
-    this.competitionService.findAll().subscribe((data) => {
-      this.competitions = data.competitions;
-      console.log(data.competitions);
-    });
+  all(page: number, size: number) {
+    this.competitionService.getCompetitions(page, size).subscribe(
+      (data) => {
+        this.competitions = data.content;
+        this.data = data;
+        this.totalPages = data.totalPages;
+      },
+      (error) => {
+        console.log('Error fetching competitions', error);
+      }
+    );
   }
+
+  // all(): void {
+  //   this.competitionService
+
+  //     .findAllPaginated(this.page, this.items)
+  //     .subscribe((data) => {
+  //       this.competitions = data.competitions;
+  //       this.totalElements = data.competitions.length;
+  //     });
+  // }
 
   running(): void {
     const currentTime = new Date();
@@ -51,7 +86,7 @@ export class CompetitionsComponent implements OnInit {
       return endDate < currentTime;
     });
 
-    console.log(doneCompetitions)
+    console.log(doneCompetitions);
 
     this.competitions = doneCompetitions;
   }
@@ -66,7 +101,7 @@ export class CompetitionsComponent implements OnInit {
       return startDate > currentTime;
     });
 
-    console.log(upcomingCompetitions)
+    console.log(upcomingCompetitions);
     this.competitions = upcomingCompetitions;
   }
 
@@ -93,7 +128,7 @@ export class CompetitionsComponent implements OnInit {
   applyFilter(): void {
     switch (this.selectedFilter) {
       case 'All':
-        this.all();
+        this.all(0, 3);
         break;
       case 'Running':
         this.running();
@@ -105,7 +140,7 @@ export class CompetitionsComponent implements OnInit {
         this.upcoming();
         break;
       default:
-        this.all();
+        this.all(0, 3);
         break;
     }
   }
@@ -136,7 +171,7 @@ export class CompetitionsComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500,
       });
-      this.all();
+      this.all(0, 3);
     });
   }
 }

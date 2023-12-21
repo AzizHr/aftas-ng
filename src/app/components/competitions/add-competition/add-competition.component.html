@@ -1,27 +1,27 @@
 <form method="post" (ngSubmit)="addCompetition()" class="grid gap-10 md:w-[50%] w-[100%] mx-auto rounded-sm shadow-lg p-4">
     <div class="grid gap-3">
         <label for="title" class="text-gray-600">Date</label>
-        <input type="date" name="title" [(ngModel)]="competition.date" placeholder="Subject title" class="px-2 py-3 rounded-sm border border-gray-500">
+        <input type="date" name="title" [(ngModel)]="competition.date" class="px-2 py-3 rounded-sm border border-gray-500">
     </div>
     <div class="grid gap-3">
         <label for="title" class="text-gray-600">Start time</label>
-        <input type="time" name="title" [(ngModel)]="competition.startTime" placeholder="Subject title" class="px-2 py-3 rounded-sm border border-gray-500">
+        <input type="time" name="title" [(ngModel)]="competition.startTime" class="px-2 py-3 rounded-sm border border-gray-500">
     </div>
     <div class="grid gap-3">
         <label for="title" class="text-gray-600">End time</label>
-        <input type="time" name="title" [(ngModel)]="competition.endTime" placeholder="Subject title" class="px-2 py-3 rounded-sm border border-gray-500">
+        <input type="time" name="title" [(ngModel)]="competition.endTime" class="px-2 py-3 rounded-sm border border-gray-500">
     </div>
     <div class="grid gap-3">
         <label for="title" class="text-gray-600">Participants</label>
-        <input type="number" name="title" [(ngModel)]="competition.numberOfParticipants" placeholder="Subject title" class="px-2 py-3 rounded-sm border border-gray-500">
+        <input type="number" name="title" [(ngModel)]="competition.numberOfParticipants" placeholder="number of participants" class="px-2 py-3 rounded-sm border border-gray-500">
     </div>
     <div class="grid gap-3">
         <label for="title" class="text-gray-600">Location</label>
-        <input type="text" name="title" [(ngModel)]="competition.location" placeholder="Subject title" class="px-2 py-3 rounded-sm border border-gray-500">
+        <input type="text" name="title" [(ngModel)]="competition.location" placeholder="Competition location" class="px-2 py-3 rounded-sm border border-gray-500">
     </div>
     <div class="grid gap-3">
         <label for="title" class="text-gray-600">Amount</label>
-        <input type="number" name="title" [(ngModel)]="competition.amount" placeholder="Subject title" class="px-2 py-3 rounded-sm border border-gray-500">
+        <input type="number" name="title" [(ngModel)]="competition.amount" placeholder="Competition amount" class="px-2 py-3 rounded-sm border border-gray-500">
     </div>
     <button class="rounded-sm bg-cyan-500 p-3 font-semibold justify-self-start text-gray-50">Submit</button>
 </form>

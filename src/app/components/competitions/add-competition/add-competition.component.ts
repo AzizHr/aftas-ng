@@ -15,7 +15,7 @@ export class AddCompetitionComponent {
       date: '',
       startTime: '',
       endTime: '',
-      numberOfParticipants: 0,
+      numberOfParticipants: 3,
       location: '',
       amount: 0
     };

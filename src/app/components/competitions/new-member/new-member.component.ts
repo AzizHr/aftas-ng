@@ -41,8 +41,8 @@ export class NewMemberComponent implements OnInit {
 
   getCompetitions(): void {
     this.competitionService.findAll().subscribe((data) => {
-      this.competitions = data.competitions;
-      console.log(data.competitions);
+      this.competitions = data.content;
+      console.log(data.content);
     });
   }
 

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, catchError } from 'rxjs';
 import { Competition } from 'src/app/models/competition/Competition';
@@ -13,8 +13,13 @@ export class CompetitionService {
 
   constructor(private http: HttpClient) {}
 
-  findAll(): Observable<any> {
+  public findAll(): Observable<any> {
     return this.http.get<any>(this.api);
+  }
+
+  getCompetitions(page: number, size: number): Observable<any> {
+    const params = new HttpParams().set('page', page.toString()).set('size', size.toString());
+    return this.http.get<any>(this.api, { params });
   }
 
   save(competition: Competition): Observable<CompetitionResponse> {

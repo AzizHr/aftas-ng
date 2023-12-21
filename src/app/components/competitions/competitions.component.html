@@ -120,4 +120,42 @@
     </div>
     <span *ngIf="competitions.length == 0"> No competitions found! </span>
   </div>
+  <div class="mt-5 mx-auto w-fit">
+    <div class="flex items-center">
+      <!-- Previous Page Button -->
+      <button
+        class="bg-blue-500 text-white px-4 py-2 rounded-l"
+        [disabled]="isfirstPage()"
+        (click)="onPageChange({ page: page - 1, rows: items })"
+      >
+        Previous
+      </button>
+
+      <!-- Page Numbers -->
+      <div class="flex">
+        <button
+          class="bg-blue-500 text-white px-4 py-2"
+          (click)="onPageChange({ page: 0, rows: items })"
+        >
+          1
+        </button>
+        <button
+          class="bg-blue-500 text-white px-4 py-2"
+          (click)="onPageChange({ page: 1, rows: items })"
+        >
+          2
+        </button>
+        <!-- Add more buttons for additional pages -->
+      </div>
+
+      <!-- Next Page Button -->
+      <button
+      [disabled]="isLastPage()"
+        class="bg-blue-500 text-white px-4 py-2 rounded-r"
+        (click)="onPageChange({ page: page + 1, rows: items })"
+      >
+        Next
+      </button>
+    </div>
+  </div>
 </div>
